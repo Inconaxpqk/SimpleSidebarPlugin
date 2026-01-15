@@ -5,3 +5,11 @@ sidebar:
     - "&7Игрок: &f%player%"
     - "&7Онлайн: &a%online%"
     - "&7Мир: &b%world%"
+tab:
+  enabled: true
+  header:
+    - строка
+    - строка
+  footer:
+    - строка
+    - строка

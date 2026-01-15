@@ -52,11 +52,46 @@ public final class SimpleSidebarPlugin extends JavaPlugin {
         new BukkitRunnable() {
             @Override
             public void run() {
-                Bukkit.getOnlinePlayers().forEach(SimpleSidebarPlugin.this::updateSidebar);
+                Bukkit.getOnlinePlayers().forEach(player -> {
+                    updateSidebar(player);
+                    updateTab(player);
+                });
             }
         }.runTaskTimer(this, 0L, interval);
     }
+    private void updateTab(Player player) {
+        boolean enabled = getConfig().getBoolean("tab.enabled");
+        if (enabled == true){
+            List<String> headerLines = getConfig().getStringList("tab.header");
+            List<String> footerLines = getConfig().getStringList("tab.footer");
 
+            StringBuilder headerBuilder = new StringBuilder();
+            for (int i = 0; i < headerLines.size(); i++) {
+                String text = replacePlaceholders(player, headerLines.get(i));
+                text = ChatColor.translateAlternateColorCodes('&', text);
+                headerBuilder.append(text);
+                if (i < headerLines.size() - 1) {
+                    headerBuilder.append("\n");
+                }
+            }
+
+
+            StringBuilder footerBuilder = new StringBuilder();
+            for (int i = 0; i < footerLines.size(); i++) {
+                String text = replacePlaceholders(player, footerLines.get(i));
+                text = ChatColor.translateAlternateColorCodes('&', text);
+                footerBuilder.append(text);
+                if (i < footerLines.size() - 1) {
+                    footerBuilder.append("\n");
+                }
+            }
+
+            player.setPlayerListHeaderFooter(
+                    headerBuilder.toString(),
+                    footerBuilder.toString()
+            );
+        }
+    }
     private void updateSidebar(Player player) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         if (manager == null) return;
