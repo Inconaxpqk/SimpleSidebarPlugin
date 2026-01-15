@@ -1,0 +1,5 @@
+name: SimpleSidebarPlugin
+version: '1.0-SNAPSHOT'
+main: com.inconaxpqk.simpleSidebarPlugin.SimpleSidebarPlugin
+api-version: '1.19'
+softdepend: [PlaceholderAPI]

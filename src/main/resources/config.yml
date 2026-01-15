@@ -1,0 +1,7 @@
+sidebar:
+  title: "&aSimpleSidebar"
+  update-interval: 20
+  lines:
+    - "&7Игрок: &f%player%"
+    - "&7Онлайн: &a%online%"
+    - "&7Мир: &b%world%"
